@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMS | Bukhari Mega Store</title>
+    
+    <!-- Custom BMS Favicon & Mobile App Icon (Gold Luxury Logo) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230b0b0b'/><rect x='5' y='5' width='90' height='90' rx='15' fill='none' stroke='%23d4af37' stroke-width='4'/><text x='50%' y='62%' font-family='Cinzel, Georgia, serif' font-size='42' font-weight='bold' fill='%23d4af37' text-anchor='middle'>BMS</text></svg>">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230b0b0b'/><rect x='5' y='5' width='90' height='90' rx='15' fill='none' stroke='%23d4af37' stroke-width='4'/><text x='50%' y='62%' font-family='Cinzel, Georgia, serif' font-size='42' font-weight='bold' fill='%23d4af37' text-anchor='middle'>BMS</text></svg>">
+    <meta name="apple-mobile-web-app-title" content="BMS Store">
+    <meta name="application-name" content="BMS Store">
+    <meta name="theme-color" content="#0b0b0b">
+
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            background-color: #0b0b0b;
+            color: #f5f5f5;
+        }
+        /* Announcement Bar */
+        .top-announcement {
+            background: #d4af37;
+            color: #000;
+            text-align: center;
+            padding: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        /* Header */
+        header {
+            background: rgba(11, 11, 11, 0.95);
+            border-bottom: 1px solid #222;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .nav-container {
+            max-width: 1400px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 40px;
+        }
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 26px;
+            font-weight: 700;
+            color: #d4af37;
+            text-decoration: none;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .logo-badge {
+            background: #d4af37;
+            color: #000;
+            font-size: 14px;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        .nav-links a {
+            color: #ddd;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            color: #d4af37;
+        }
+        .admin-badge {
+            background: #d4af37;
+            color: #000;
+            padding: 8px 18px;
+            font-size: 12px;
+            font-weight: 600;
+            border-radius: 20px;
+            cursor: pointer;
+            text-transform: uppercase;
+            border: none;
+            transition: 0.3s;
+        }
+        .admin-badge:hover {
+            background: #fff;
+        }
+
+        /* Hero Banner */
+        .hero-luxury {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1600&q=80') center/cover;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+        .hero-content h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 48px;
+            color: #d4af37;
+            margin-bottom: 15px;
+            letter-spacing: 3px;
+        }
+        .hero-content p {
+            font-size: 16px;
+            color: #ccc;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+        }
+        .luxury-btn {
+            background: transparent;
+            color: #d4af37;
+            border: 2px solid #d4af37;
+            padding: 12px 35px;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-decoration: none;
+            transition: 0.4s;
+            cursor: pointer;
+        }
+        .luxury-btn:hover {
+            background: #d4af37;
+            color: #000;
+        }
+
+        /* Main Container */
+        .main-container {
+            max-width: 1400px;
+            margin: auto;
+            padding: 60px 40px;
+        }
+        .section-heading {
+            text-align: center;
+            font-family: 'Cinzel', serif;
+            font-size: 32px;
+            color: #d4af37;
+            margin-bottom: 40px;
+            letter-spacing: 2px;
+        }
+
+        /* Admin Panel Section */
+        #admin-panel {
+            background: #141414;
+            border: 2px solid #d4af37;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 50px;
+            display: none;
+        }
+        #admin-panel h3 {
+            color: #d4af37;
+            margin-bottom: 20px;
+            font-family: 'Cinzel', serif;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: #ccc;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            background: #222;
+            border: 1px solid #333;
+            color: white;
+            border-radius: 5px;
+            font-size: 14px;
+            outline: none;
+        }
+        .form-group input[type="file"] {
+            padding: 8px;
+            cursor: pointer;
+        }
+        .submit-product-btn {
+            background: #d4af37;
+            color: #000;
+            padding: 12px 25px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            text-transform: uppercase;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        .submit-product-btn:hover {
+            background: #fff;
+        }
+
+        /* Products Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        .product-item {
+            background: #141414;
+            border: 1px solid #222;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+        .product-item:hover {
+            border-color: #d4af37;
+            transform: translateY(-5px);
+        }
+        .product-image {
+            height: 350px;
+            background: #222;
+            position: relative;
+        }
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .product-details {
+            padding: 20px;
+            text-align: center;
+        }
+        .product-details h3 {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+        .product-price {
+            color: #d4af37;
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .product-variants {
+            font-size: 12px;
+            color: #aaa;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        .product-variants span {
+            color: #d4af37;
+        }
+        .buy-btn {
+            width: 100%;
+            background: #d4af37;
+            color: #000;
+            border: none;
+            padding: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .buy-btn:hover {
+            background: #fff;
+        }
+
+        /* Modal Popup for Order */
+        #order-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background: #141414;
+            border: 2px solid #d4af37;
+            padding: 30px;
+            width: 90%;
+            max-width: 450px;
+            border-radius: 10px;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .modal-content h3 {
+            color: #d4af37;
+            margin-bottom: 20px;
+            font-family: 'Cinzel', serif;
+        }
+        .close-modal {
+            position: absolute;
+            top: 15px; right: 20px;
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        /* Footer */
+        footer {
+            background: #050505;
+            border-top: 1px solid #222;
+            text-align: center;
+            padding: 40px 20px;
+            color: #777;
+            font-size: 13px;
+            letter-spacing: 1px;
+            margin-top: 60px;
+        }
+    </style>
+</head>
+<body>
+
+    <script>
+        const OWNER_WHATSAPP_NUMBER = "923146194256"; 
+    </script>
+
+    <!-- Announcement Bar -->
+    <div class="top-announcement">
+        ✨ BMS | BUKHARI MEGA STORE - CASH ON DELIVERY ALL OVER PAKISTAN ✨
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo"><span class="logo-badge">BMS</span> Bukhari Mega Store</a>
+            <ul class="nav-links">
+                <li><a onclick="filterCategory('All')" id="nav-all" class="active">All</a></li>
+                <li><a onclick="filterCategory('Dresses')">Dresses</a></li>
+                <li><a onclick="filterCategory('Shoes')">Shoes</a></li>
+                <li><a onclick="filterCategory('Watches')">Watches</a></li>
+                <li><a onclick="filterCategory('Jewelry')">Jewelry</a></li>
+            </ul>
+            <div class="nav-icons">
+                <button class="admin-badge" id="admin-toggle-btn"><i class="fa fa-plus-circle"></i> Add Product</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-luxury">
+        <div class="hero-content">
+            <h1>BMS Luxury Collection</h1>
+            <p>Pakistan's Premier Destination for Luxury Wear, Shoes, Watches & Accessories</p>
+            <button class="luxury-btn" onclick="document.getElementById('shop').scrollIntoView({behavior: 'smooth'})">Explore Collection</button>
+        </div>
+    </section>
+
+    <!-- Main Container -->
+    <div class="main-container" id="shop">
+        
+        <!-- ADMIN DASHBOARD PANEL -->
+        <div id="admin-panel">
+            <h3><i class="fa fa-lock"></i> Owner Product Upload Panel (BMS Store)</h3>
+            <div class="form-group">
+                <label>Product Name (e.g. Royal Designer Suit):</label>
+                <input type="text" id="p-name" placeholder="Enter product name">
+            </div>
+            <div class="form-group">
+                <label>Price in PKR (e.g. Rs. 4,500):</label>
+                <input type="text" id="p-price" placeholder="Rs. 0000">
+            </div>
+            <div class="form-group">
+                <label>Category:</label>
+                <select id="p-cat" onchange="updateDefaultSizes()">
+                    <option value="Dresses">Dresses (Shirts, Maxis, Suits)</option>
+                    <option value="Shoes">Shoes (Sneakers, Formal, Sandals)</option>
+                    <option value="Watches">Watches</option>
+                    <option value="Jewelry">Jewelry</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Available Colors (Comma separated):</label>
+                <input type="text" id="p-colors" value="Black, White, Gold, Red, Blue" placeholder="e.g. Black, Gold, Maroon">
+            </div>
+            <div class="form-group">
+                <label>Available Sizes (Auto or Custom):</label>
+                <input type="text" id="p-sizes" value="Small, Medium, Large, XL, Unstitched" placeholder="e.g. S, M, L, XL or 39,40,41,42">
+            </div>
+            <div class="form-group">
+                <label>Upload Product Picture from Gallery:</label>
+                <input type="file" id="p-file" accept="image/*">
+            </div>
+            <button class="submit-product-btn" id="publish-btn">Publish Product Now</button>
+        </div>
+
+        <h2 class="section-heading">Featured Collection</h2>
+        
+        <!-- Products Grid -->
+        <div class="product-grid" id="product-container">
+            <!-- Dynamic Products -->
+        </div>
+    </div>
+
+    <!-- Order Modal Popup -->
+    <div id="order-modal">
+        <div class="modal-content">
+            <span class="close-modal" id="close-modal-btn">&times;</span>
+            <h3>Complete Your Order</h3>
+            <p id="modal-product-title" style="color:#d4af37; margin-bottom:15px; font-weight:600;"></p>
+            
+            <div class="form-group">
+                <label>Select Color:</label>
+                <select id="cust-color">
+                    <!-- Dynamic Options -->
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Select Size / Variation:</label>
+                <select id="cust-size">
+                    <!-- Dynamic Options -->
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Your Full Name:</label>
+                <input type="text" id="cust-name" placeholder="Enter your name">
+            </div>
+            <div class="form-group">
+                <label>Phone Number (Mobile):</label>
+                <input type="text" id="cust-phone" placeholder="0300-1234567">
+            </div>
+            <div class="form-group">
+                <label>Complete Delivery Address (City/House/Street):</label>
+                <input type="text" id="cust-address" placeholder="Enter delivery address">
+            </div>
+            <button class="submit-product-btn" id="confirm-order-btn" style="width:100%;">Confirm Order via WhatsApp</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 BMS - Bukhari Mega Store. Managed by Syed Shah zain shah bukhari. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        function updateDefaultSizes() {
+            const cat = document.getElementById('p-cat').value;
+            const sizeInput = document.getElementById('p-sizes');
+            if (cat === 'Dresses') {
+                sizeInput.value = "Small, Medium, Large, XL, Unstitched 3-Piece";
+            } else if (cat === 'Shoes') {
+                sizeInput.value = "Size 39, Size 40, Size 41, Size 42, Size 43";
+            } else if (cat === 'Watches') {
+                sizeInput.value = "Standard Size, Adjustable";
+            } else if (cat === 'Jewelry') {
+                sizeInput.value = "Standard, Adjustable Ring/Necklace";
+            }
+        }
+
+        let defaultSample = [
+            { 
+                name: "Royal Velvet Luxury Maxi", 
+                price: "Rs. 12,500", 
+                category: "Dresses", 
+                colors: "Red, Black, Royal Blue, Gold",
+                sizes: "Small, Medium, Large, XL, Unstitched",
+                img: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=600&q=80" 
+            }
+        ];
+
+        let products = JSON.parse(localStorage.getItem('bukhari_products_v5'));
+        if(!products || products.length === 0) {
+            products = defaultSample;
+            localStorage.setItem('bukhari_products_v5', JSON.stringify(products));
+        }
+
+        let selectedProductForOrder = null;
+
+        function renderProducts(filter = 'All') {
+            const container = document.getElementById('product-container');
+            container.innerHTML = '';
+            
+            let filtered = products.filter(p => filter === 'All' || p.category === filter);
+
+            if(filtered.length === 0) {
+                container.innerHTML = '<p style="color: #777; text-align: center; grid-column: 1/-1; padding: 40px;">No products available yet. Click "+ Add Product" above to publish your items!</p>';
+                return;
+            }
+
+            filtered.forEach((p, index) => {
+                let colorsDisplay = p.colors ? p.colors : "Standard Color";
+                let sizesDisplay = p.sizes ? p.sizes : "Standard Size";
+
+                container.innerHTML += `
+                    <div class="product-item">
+                        <div class="product-image">
+                            <img src="${p.img}" alt="${p.name}">
+                        </div>
+                        <div class="product-details">
+                            <h3>${p.name}</h3>
+                            <div class="product-price">${p.price}</div>
+                            <div class="product-variants">
+                                <div>Colors: <span>${colorsDisplay}</span></div>
+                                <div>Sizes: <span>${sizesDisplay}</span></div>
+                            </div>
+                            <button class="buy-btn" onclick="openOrderModal(${index})">Order on WhatsApp</button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        document.getElementById('admin-toggle-btn').addEventListener('click', function() {
+            const panel = document.getElementById('admin-panel');
+            if (panel.style.display === 'none' || panel.style.display === '') {
+                panel.style.display = 'block';
+                panel.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                panel.style.display = 'none';
+            }
+        });
+
+        document.getElementById('publish-btn').addEventListener('click', function() {
+            const name = document.getElementById('p-name').value.trim();
+            const price = document.getElementById('p-price').value.trim();
+            const category = document.getElementById('p-cat').value;
+            const colors = document.getElementById('p-colors').value.trim() || "Black, Gold, Red";
+            const sizes = document.getElementById('p-sizes').value.trim() || "Small, Medium, Large";
+            const fileInput = document.getElementById('p-file');
+
+            if(!name || !price) {
+                alert('Meherbani karke product ka naam aur price enter karein!');
+                return;
+            }
+
+            if(fileInput.files && fileInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = e.target.result;
+                    products.unshift({ name, price, category, colors, sizes, img });
+                    localStorage.setItem('bukhari_products_v5', JSON.stringify(products));
+                    resetAndRefresh();
+                }
+                reader.readAsDataURL(fileInput.files[0]);
+            } else {
+                const img = "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=600&q=80";
+                products.unshift({ name, price, category, colors, sizes, img });
+                localStorage.setItem('bukhari_products_v5', JSON.stringify(products));
+                resetAndRefresh();
+            }
+        });
+
+        function resetAndRefresh() {
+            document.getElementById('p-name').value = '';
+            document.getElementById('p-price').value = '';
+            document.getElementById('p-colors').value = 'Black, White, Gold, Red, Blue';
+            document.getElementById('p-sizes').value = 'Small, Medium, Large, XL, Unstitched';
+            document.getElementById('p-file').value = '';
+            document.getElementById('admin-panel').style.display = 'none';
+            renderProducts('All');
+            alert('Zabardast! Aapki nayi product BMS Store par live ho gayi hai!');
+        }
+
+        function openOrderModal(index) {
+            selectedProductForOrder = products[index];
+            document.getElementById('modal-product-title').innerText = `${selectedProductForOrder.name} (${selectedProductForOrder.price})`;
+            
+            const colorSelect = document.getElementById('cust-color');
+            colorSelect.innerHTML = '';
+            let colorStr = selectedProductForOrder.colors || "Black, Gold";
+            let colorArr = colorStr.split(',');
+            colorArr.forEach(c => {
+                colorSelect.innerHTML += `<option value="${c.trim()}">${c.trim()}</option>`;
+            });
+
+            const sizeSelect = document.getElementById('cust-size');
+            sizeSelect.innerHTML = '';
+            let sizeStr = selectedProductForOrder.sizes || "Small, Medium, Large";
+            let sizeArr = sizeStr.split(',');
+            sizeArr.forEach(s => {
+                sizeSelect.innerHTML += `<option value="${s.trim()}">${s.trim()}</option>`;
+            });
+
+            document.getElementById('order-modal').style.display = 'flex';
+        }
+
+        document.getElementById('close-modal-btn').addEventListener('click', function() {
+            document.getElementById('order-modal').style.display = 'none';
+        });
+
+        document.getElementById('confirm-order-btn').addEventListener('click', function() {
+            const name = document.getElementById('cust-name').value.trim();
+            const phone = document.getElementById('cust-phone').value.trim();
+            const address = document.getElementById('cust-address').value.trim();
+            const chosenColor = document.getElementById('cust-color').value;
+            const chosenSize = document.getElementById('cust-size').value;
+
+            if(!name || !phone || !address) {
+                alert('Please fill in all details (Name, Phone, Address)!');
+                return;
+            }
+
+            const message = `New Order on BMS (Bukhari Mega Store)!%0A%0A*Product:* ${selectedProductForOrder.name}%0A*Price:* ${selectedProductForOrder.price}%0A*Color Selected:* ${chosenColor}%0A*Size/Type Selected:* ${chosenSize}%0A%0A*Customer Name:* ${name}%0A*Phone:* ${phone}%0A*Address:* ${address}`;
+            
+            window.open(`https://wa.me/${OWNER_WHATSAPP_NUMBER}?text=${message}`, '_blank');
+            document.getElementById('order-modal').style.display = 'none';
+        });
+
+        function filterCategory(cat) {
+            document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+            renderProducts(cat);
+        }
+
+        renderProducts('All');
+    </script>
+</body>
+</html>
